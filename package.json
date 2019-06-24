@@ -1,0 +1,16 @@
+{
+  "name": "timebank-project",
+  "version": "1.0.0",
+  "description": "It is a platform where the users can exchange skills with their time. This is implemented using public blockchain.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "lite-server"
+  },
+  "author": "R.K. Moukthika, K. Avanthika, and Y. Khyathi",
+  "license": "ISC",
+  "dependencies": {
+    "lite-server": "^2.4.0",
+    "web3": "^0.20.7"
+  }
+}

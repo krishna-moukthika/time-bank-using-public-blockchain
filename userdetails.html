@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Time Bank</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1><a href="index.html">Time Bank</a></h1>
+					<!--<nav id="nav">
+						<ul>
+							<li><a href="signin.html" class="button">Principal</a></li>
+							<li><a href="teacher.html" class="button">Teacher</a></li>
+							<li><a href="parent.html" class="button">Parent</a></li>
+						</ul>
+					</nav>-->
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Welcome to Time Bank</h2>
+						<!--<p>Please Register here...</p>-->
+					</header>
+					<div class="row">
+						<div class="12u">
+
+							<!--Form -->
+								<section class="box">
+									<h3 id="owner">Get User Details</h3>
+										<div class="row uniform 50%">
+											<div class="12u 12u">
+												<input id="uaddr" type="text" name="uaddr" value="" placeholder="Account Address" required/>
+											</div>
+										</div>
+																				<div class="row uniform">
+											<div class="12u">
+												<ul class="actions">
+													<li><input  id="button" type="submit" value="Get details"/></li>
+													<!-----<li><input type="reset" value="Reset" class="alt" /></li> --->
+												</ul>
+											</div>
+										</div>
+
+									<hr />
+
+									
+								</section>
+
+						</div>
+					</div>
+					
+									
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="copyright">
+						<li>&copy;All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script>
+				if (typeof web3 !== 'undefined') {
+					web3 = new Web3(web3.currentProvider);
+				} else {
+					web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+				}
+		 
+		 
+		 
+				web3.eth.defaultAccount = web3.eth.accounts[0];
+		 
+				var UserdataContract = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_jobTitle",
+				"type": "string"
+			},
+			{
+				"name": "_jobDetails",
+				"type": "string"
+			}
+		],
+		"name": "postJob",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"name": "_uaddr",
+				"type": "address"
+			},
+			{
+				"name": "_location",
+				"type": "string"
+			},
+			{
+				"name": "_skills",
+				"type": "string"
+			},
+			{
+				"name": "_userRole",
+				"type": "string"
+			}
+		],
+		"name": "setProfile",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "jid",
+				"type": "uint256"
+			}
+		],
+		"name": "jobInfo",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "jobs",
+		"outputs": [
+			{
+				"name": "jobTitle",
+				"type": "string"
+			},
+			{
+				"name": "writtenBy",
+				"type": "address"
+			},
+			{
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"name": "jobDetails",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_uaddr",
+				"type": "address"
+			}
+		],
+		"name": "userInfo",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userJobs",
+		"outputs": [
+			{
+				"name": "jobTitle",
+				"type": "string"
+			},
+			{
+				"name": "writtenBy",
+				"type": "address"
+			},
+			{
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"name": "jobDetails",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "users",
+		"outputs": [
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "uaddr",
+				"type": "address"
+			},
+			{
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"name": "skills",
+				"type": "string"
+			},
+			{
+				"name": "user_role",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+		 
+		 var timebank = UserdataContract.at('0xb5463c7770c862f0cc364932745c9bdf4849e1cb');
+
+//       pharmasupplychain.getInstructor(function(error, result) {
+  //         if (!error) {
+    //           $("#instructor").html(result[0]+' ('+result[1]+' years old)');
+ //          } else
+   //             console.log(error);
+  //     });
+
+       $("#button").click(function() {
+           
+        timebank.userInfo($("#uaddr").val(),(err, result) => {
+          if (err){
+            console.log(err);
+          } else{
+              //$("#name").val(), $("#uaddr").val(), $("#skills").val(),$("#location").val(),$("#user_role").val()
+              $("#owner").html('Name: ' + result[0] + '<br>' + 'Account address: ' + result[1] + '<br>' + 'Skills: ' + result[2]+ '<br>' + 'Location: ' + result[3]+ '<br>' + 'User Role: ' + result[4]);
+            }   
+        })
+            
+        });
+		 
+			 </script>
+
+	</body>
+</html>

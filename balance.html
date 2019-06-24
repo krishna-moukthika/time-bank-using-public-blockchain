@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<!--
+	Alpha by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Time Bank</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1><a href="index.html">Time Bank</a></h1>
+					<!--<nav id="nav">
+						<ul>
+							<li><a href="signin.html" class="button">Principal</a></li>
+							<li><a href="teacher.html" class="button">Teacher</a></li>
+							<li><a href="parent.html" class="button">Parent</a></li>
+						</ul>
+					</nav>-->
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Welcome to Time Bank</h2>
+						<!--<p>Please Register here...</p>-->
+					</header>
+					<div class="row">
+						<div class="12u">
+
+							<!--Form -->
+								<section class="box">
+									<h3 id="owner">Get Account Balance</h3>
+									<form>
+										<div class="row uniform 50%">
+											<div class="12u 12u">
+												<input type="text" name="name" id="uaddr" value="" placeholder="Account Address" required/>
+											</div>
+										</div>
+																				<div class="row uniform">
+											<div class="12u">
+												<ul class="actions">
+													<li><input type="submit" id="button" value="Get balance"/></li>
+													<!-----<li><input type="reset" value="Reset" class="alt" /></li> --->
+												</ul>
+											</div>
+										</div>
+									</form>
+
+									<hr />
+
+									
+								</section>
+
+						</div>
+					</div>
+					
+									
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="copyright">
+						<li>&copy;All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script>
+				if (typeof web3 !== 'undefined') {
+           web3 = new Web3(web3.currentProvider);
+       } else {
+           web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+       }
+
+
+
+       web3.eth.defaultAccount = web3.eth.accounts[0];
+
+       var CreditTransferContract = web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_uaddr",
+				"type": "address"
+			}
+		],
+		"name": "enroll",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_uaddr",
+				"type": "address"
+			}
+		],
+		"name": "balance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+
+       var timebank = CreditTransferContract.at('0xa830e500dd65aaa66c6d4cec6e1b1ac5f067f4f6');
+
+       $("#button").click(function() {
+           
+        timebank.balance($("#uaddr").val(),(err, result) => {
+          if (err){
+            console.log(err);
+          } else{
+              $("#bal").html('Account Balance: ' + result[0] + 'Time credits');
+            }   
+        })
+            
+        });
+
+			 </script>
+
+	</body>
+</html>
